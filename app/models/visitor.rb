@@ -7,6 +7,13 @@ class Visitor
   def subscribe
     mailchimp = Gibbon::Request.new(api_key: Rails.application.secrets.mailchimp_api_key)
     list_id = Rails.application.secrets.mailchimp_list_id
+    Rails.logger.debug("*"*40)
+    Rails.logger.debug("mailchimp #{mailchimp.inspect}")
+    Rails.logger.debug("*"*40)
+   
+    Rails.logger.debug("list_id #{list_id.inspect}")
+    Rails.logger.debug("*"*40)
+
     result = mailchimp.lists(list_id).members.create(
       body: {
         email_address: self.email,
